@@ -1,0 +1,23 @@
+{
+  "name": "hangman",
+  "version": "1.0.0",
+  "description": "word game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pushpender98/Project.git"
+  },
+  "author": "Pushpender Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pushpender98/Project/issues"
+  },
+  "homepage": "https://github.com/pushpender98/Project#readme",
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  }
+}
