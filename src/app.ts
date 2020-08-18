@@ -9,7 +9,7 @@ let wrongLetter: Array<string> = [];
 var letter: string;
 
 // Random Array of Words
-const randomWords: Array<string> = ['hello'];
+const randomWords: Array<string> = ['hello', 'programming', 'help', 'technology'];
 // Choose any word from the random words
 let chooseRandomWord: string = randomWords[Math.floor(Math.random() * randomWords.length)].toLowerCase();
 
@@ -43,10 +43,6 @@ let displayNotification = (): void => {
     1000);
 }
 
-let showHangManParts = () => {
-  
-}
-
 // It will check and update the correct word or character
 let displayWord = () => {
     wordDiv.innerHTML = `
@@ -76,7 +72,7 @@ let updateWrongWord = () => {
     ${wrongLetter.length > 0 ? '<p>Wrong</p>' : ''}
     ${wrongLetter.map(letter => `<span>${letter}</span>`)}`;
     
-    wrongLetter.forEach((value, index) => {
+    imagePieces.forEach((value, index) => {
         let wrongLetterLength = wrongLetter.length;
         if(index < wrongLetterLength){
             imagePieces[index].style.display = 'block';
@@ -109,7 +105,6 @@ let wordsTyped = (e: KeyboardEvent) => {
                 wrongLetter.push(letter);
 
                 updateWrongWord();
-                showHangManParts();
             }
             else{
                 displayNotification();
@@ -119,6 +114,18 @@ let wordsTyped = (e: KeyboardEvent) => {
         displayErrorMessage();
     }
 }
+
+// Play Again button
+document.getElementById('play-button')?.addEventListener('click', () => {
+    correctLetter = [];
+    wrongLetter = [];
+
+    chooseRandomWord = randomWords[Math.floor(Math.random() * randomWords.length)].toLowerCase();
+    displayWord();
+    updateWrongWord();
+
+    popupcontainer.style.display = 'none';
+});
 
 window.addEventListener('keyup', wordsTyped);
 displayWord();
