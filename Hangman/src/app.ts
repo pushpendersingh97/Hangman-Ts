@@ -78,9 +78,9 @@ let updateWrongWord = () => {
     imagePieces.forEach((value, index) => {
         let wrongLetterLength = wrongLetter.length;
         if(index < wrongLetterLength){
-            imagePieces[index].style.display = 'block';
+            (imagePieces[index] as HTMLCanvasElement).style.display = 'block';
         }else{
-            imagePieces[index].style.display = 'none';
+            (imagePieces[index] as HTMLCanvasElement).style.display = 'none';
         }
     });
 
