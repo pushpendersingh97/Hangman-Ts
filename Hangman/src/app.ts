@@ -85,7 +85,7 @@ let updateWrongWord = () => {
     });
 
     if(wrongLetter.length == imagePieces.length){
-        finalMessage.innerText = "Sorry You have lost";
+        finalMessage.innerText = "Sorry, You have lost. Correct Word is: " + chooseRandomWord;
         popupcontainer.style.display = "flex";
     }
 }
