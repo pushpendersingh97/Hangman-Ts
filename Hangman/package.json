@@ -19,5 +19,6 @@
   "homepage": "https://github.com/pushpender98/Project#readme",
   "devDependencies": {
     "lite-server": "^2.5.4"
-  }
+  },
+  "dependencies": {}
 }

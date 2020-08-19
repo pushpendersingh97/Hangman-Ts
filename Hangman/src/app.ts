@@ -1,3 +1,6 @@
+import * as word from '../words.js';
+//console.log(word.default.value);
+
 const imagePieces: NodeList = document.querySelectorAll('.images-piece');
 let finalMessage = document.getElementById('final-message')!;
 let popupcontainer = document.getElementById('popup-container')!;
@@ -9,7 +12,7 @@ let wrongLetter: Array<string> = [];
 var letter: string;
 
 // Random Array of Words
-const randomWords: Array<string> = ['hello', 'programming', 'help', 'technology'];
+const randomWords: Array<string> = word.default.value;
 // Choose any word from the random words
 let chooseRandomWord: string = randomWords[Math.floor(Math.random() * randomWords.length)].toLowerCase();
 
