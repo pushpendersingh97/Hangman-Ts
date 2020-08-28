@@ -1,0 +1,16 @@
+
+div#map {
+    width: 90%;
+    height: 20rem;
+    border: 1px solid #ccc;
+    margin: 2rem auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+form {
+    margin: 2rem auto;
+    text-align: center;
+}
