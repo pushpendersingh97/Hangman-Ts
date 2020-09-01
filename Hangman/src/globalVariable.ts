@@ -1,11 +1,16 @@
 import {chooseRandomWords} from './chooseRandomWords.js';
 
-export let wordDiv = document.getElementById('word')!;
-export let finalMessage = document.getElementById('final-message')!;
-export let popupcontainer = document.getElementById('popup-container')!;
+export let wordDiv: HTMLElement, 
+        finalMessage: HTMLElement,
+        popupcontainer: HTMLElement, 
+        imagePieces:NodeList, 
+        wrongLetterDiv: HTMLElement;
 
-export const imagePieces: NodeList = document.querySelectorAll('.images-piece');
-export let wrongLetterDiv = document.getElementById('wrong-letters')!;
+wordDiv = document.getElementById('word')!;
+finalMessage = document.getElementById('final-message')!;
+popupcontainer = document.getElementById('popup-container')!;
+imagePieces = document.querySelectorAll('.images-piece');
+wrongLetterDiv = document.getElementById('wrong-letters')!;
 
 export class variables {
     public static correctLetter: Array<string> = [];
