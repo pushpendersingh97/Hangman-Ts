@@ -1,8 +1,11 @@
-import {variables} from './globalVariable.js';
-import { displayWord } from './displayWord.js';
-import { updateWrongWord } from './wrongWord.js';
+import {variables, popupcontainer, imagePieces, wrongLetterDiv, finalMessage} from './globalVariable.js';
+import UpdateCorrectLetter from './displayWord.js';
 
-// check whether the pressed key is alphabet or not
+/**
+ * 
+ * @param letterASCIICode : number
+ * check whether the pressed key is alphabet or not
+ */
 let alphabetsOnly = (letterASCIICode:number): boolean =>  {
     if (letterASCIICode > 64 && letterASCIICode < 91)
         return true;
@@ -10,44 +13,55 @@ let alphabetsOnly = (letterASCIICode:number): boolean =>  {
         return false;
 }
 
-// It will display the error message
+/**
+ * It will display the error message if you type something not an small alphabet
+ */
 let displayErrorMessage = (): void => {
-    document.querySelector('#error-conatiner')?.classList.add('show');
+   (document.querySelector('#error-conatiner') as HTMLDivElement).classList.add('show');
 
     setTimeout(
         ()=> {
-         document.querySelector('#error-conatiner')?.classList.remove('show');
+              (document.querySelector('#error-conatiner') as HTMLDivElement).classList.remove('show');
         }, 
     1000);
 }
 
-// It will display the notification message
+/**
+ * Display a notification about
+ * that you have already entered that alphabet
+ */
 let displayNotification = (): void => {
-    document.querySelector('#notification-container')?.classList.add('show');
+    (document.querySelector('#notification-container')  as HTMLDivElement).classList.add('show');
 
     setTimeout(
         ()=> {
-         document.querySelector('#notification-container')?.classList.remove('show');
+         (document.querySelector('#notification-container') as HTMLDivElement).classList.remove('show');
         },
     1000);
 }
 
-// Function that will render the word or error message
+/**
+ * 
+ * @param e => a keyboard event
+ * Function that will trigger on keyboard event
+ * 
+ */
 export let wordsTyped = (e: KeyboardEvent) => {
+    const globalVariable =  variables.getInstance();
     let letterASCIICode: number = e.keyCode;
-    variables.letter = e.key;
+    globalVariable.letter = e.key;
     
     if(alphabetsOnly(letterASCIICode)){
-        if(variables.chooseRandomWord.includes(variables.letter)){
-            if(!variables.correctLetter.includes(variables.letter)){
-                variables.correctLetter.push(variables.letter);
-                displayWord();
+        if(globalVariable.chooseRandomWord.includes(globalVariable.letter)){
+            if(!globalVariable.correctLetterArray.includes(globalVariable.letter)){
+                globalVariable.correctLetterArray.push(globalVariable.letter);
+                UpdateCorrectLetter();  // DisplayWord.ts
             }else{
                 displayNotification();
             }
         }else{
-            if(!variables.wrongLetter.includes(variables.letter)){
-                variables.wrongLetter.push(variables.letter);
+            if(!globalVariable.wrongLetterArray.includes(globalVariable.letter)){
+                globalVariable.wrongLetterArray.push(globalVariable.letter);
 
                 updateWrongWord();
             }
@@ -57,5 +71,31 @@ export let wordsTyped = (e: KeyboardEvent) => {
         }
     }else{
         displayErrorMessage();
+    }
+}
+
+/**
+ * Function that will update the image UI 
+ * Will show you pop up container, if you have lost
+ */
+export let updateWrongWord = () => {
+    const globalVariable =  variables.getInstance();
+    
+    wrongLetterDiv.innerHTML = `
+    ${globalVariable.wrongLetterArray.length > 0 ? '<p>Wrong</p>' : ''}
+    ${globalVariable.wrongLetterArray.map(letter => `<span>${letter}</span>`)}`;
+    
+    imagePieces.forEach((value, index) => {
+        let wrongLetterLength = globalVariable.wrongLetterArray.length;
+        if(index < wrongLetterLength){
+            (imagePieces[index] as HTMLCanvasElement).style.display = 'block';
+        }else{
+            (imagePieces[index] as HTMLCanvasElement).style.display = 'none';
+        }
+    });
+
+    if(globalVariable.wrongLetterArray.length == imagePieces.length){
+        finalMessage.innerText = "Sorry, You have lost. Correct Word is: " + globalVariable.chooseRandomWord;
+        popupcontainer.style.display = "flex";
     }
 }

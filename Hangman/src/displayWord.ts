@@ -1,14 +1,22 @@
 import { wordDiv, variables, finalMessage, popupcontainer} from './globalVariable.js';
 
-// It will check and update the correct word or character
-export let displayWord = () => {
-    wordDiv.innerHTML = `
-    ${variables.chooseRandomWord
+/* 
+** This function will :- 
+    ** Update the UI for the random word that is generated
+    ** Make the underlined UI according to the random word
+    ** Show the pop up container, If you Win
+*/
+let displayWord:Function;
+
+export default displayWord = () => {
+ const exportedVariable =  variables.getInstance();
+  wordDiv.innerHTML = `
+    ${exportedVariable.chooseRandomWord
       .split('')
       .map(
         letter => `
           <span class="letter">
-            ${variables.correctLetter.includes(letter) ? letter : ''}
+            ${exportedVariable.correctLetterArray.includes(letter) ? letter : ''}
           </span>
         `
       )
@@ -17,7 +25,7 @@ export let displayWord = () => {
   
     const innerWord = wordDiv.innerText.replace(/\n/g, '');
 
-    if(innerWord === variables.chooseRandomWord){
+    if(innerWord === exportedVariable.chooseRandomWord){
         finalMessage.innerText = "Congrats, You have got word";
         popupcontainer.style.display = "flex";
     }

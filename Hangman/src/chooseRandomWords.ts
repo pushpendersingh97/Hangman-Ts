@@ -6,6 +6,5 @@ const randomWordsArray: Array<string> = word.value;
 // Choose any word from the random words
 export function chooseRandomWords():string {
     let chooseRandomWord: string = randomWordsArray[Math.floor(Math.random() * randomWordsArray.length)];
-  //  chooseRandomWord = randomWordsArray[Math.floor(Math.random() * randomWordsArray.length)].toLowerCase();
     return chooseRandomWord;
 }
