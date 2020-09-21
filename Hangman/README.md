@@ -1,6 +1,7 @@
 # Hangman
 
-Link To project: pushpender-hangman.netlify.app
+Link To project: https://pushpender-hangman.netlify.app/
+
 Hangman Game
     Select a letter to figure out a hidden word in a set amount of chances
 
